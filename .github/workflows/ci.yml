@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-
   push:
     branches:
       - main
@@ -17,14 +16,6 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        run: npm install
-
       - name: Build
         run: echo "Build completed successfully"
 
@@ -34,7 +25,7 @@ jobs:
       - name: Package Artifact
         run: |
           mkdir artifact
-          echo "CI Artifact" > artifact/build.txt
+          echo "CI Pipeline Artifact" > artifact/build.txt
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
