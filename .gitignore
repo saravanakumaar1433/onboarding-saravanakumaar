@@ -1,5 +1,9 @@
-.env
 node_modules/
-*.log
-coverage/
+.env
 dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+coverage/
