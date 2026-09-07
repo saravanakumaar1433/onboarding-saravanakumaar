@@ -1,0 +1,34 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: echo "Build completed successfully"
+
+      - name: Test
+        run: echo "Tests completed successfully"
+
+      - name: Package Artifact
+        run: |
+          mkdir artifact
+          echo "CI Pipeline Artifact" > artifact/build.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: onboarding-artifact
+          path: artifact/

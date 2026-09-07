@@ -3,6 +3,10 @@ node_modules/
 dist/
 build/
 *.log
+coverage/
+.vscode/
+.DS_Store
+Thumbs.db
 .DS_Store
 Thumbs.db
 .vscode/
