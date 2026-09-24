@@ -1,0 +1,61 @@
+name: M12 CD Pipeline
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Validation
+        run: |
+          echo "Starting build validation"
+          echo "Build completed successfully"
+
+      - name: Create Deployment Package
+        run: |
+          mkdir deployment
+          echo "HCL Full Stack Onboarding Deployment" > deployment/build.txt
+          echo "Module: M12" >> deployment/build.txt
+
+      - name: Upload Deployment Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: onboarding-deployment
+          path: deployment/
+
+
+  deploy:
+    name: Deploy to Learning Environment
+    needs: build
+    runs-on: ubuntu-latest
+    environment: learning
+
+    steps:
+      - name: Download Deployment Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: onboarding-deployment
+          path: deployment
+
+      - name: Verify Deployment Package
+        run: |
+          echo "Deployment package received"
+          cat deployment/build.txt
+
+      - name: Deploy
+        run: |
+          echo "Deploying to learning environment"
+          echo "Deployment validation completed successfully"
