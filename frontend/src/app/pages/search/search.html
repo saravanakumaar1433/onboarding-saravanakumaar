@@ -1,0 +1,19 @@
+<h2>Search Users</h2>
+
+<input
+  type="text"
+  [(ngModel)]="searchText"
+  placeholder="Enter name or email"
+/>
+
+<button (click)="search()">
+  Search
+</button>
+
+<ul>
+  @for (user of users; track user.id) {
+    <li>
+      {{ user.name }} - {{ user.email }}
+    </li>
+  }
+</ul>
